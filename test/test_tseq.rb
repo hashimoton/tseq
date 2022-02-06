@@ -19,6 +19,11 @@ class TestTseq < MiniTest::Test
     assert_equal "", @ch.output
   end
   
+  def test_same
+    @ch.run("10:00:00 1 10:00:00", nil)
+    assert_equal "10:00:00\n", @ch.output
+  end
+  
   def test_no_option_min_increment
     @ch.run("09:59:58 1 10:00:00", nil)
     assert_equal "09:59:58\n09:59:59\n10:00:00\n", @ch.output
@@ -26,7 +31,7 @@ class TestTseq < MiniTest::Test
   
   def test_no_option_mid_increment
     @ch.run("10:00:00 1200 11:19:59", nil)
-    assert_equal "10:00:00\n10:20:00\n10:40:00\n11:00:00\n", @ch.output
+    assert_equal "10:00:00\n10:20:00\n10:40:00\n11:00:00\n11:20:00\n", @ch.output
   end
  
   # Pass arguments as array to resolve "'..' is not recognized as an internal or external command,operable program or batch file."

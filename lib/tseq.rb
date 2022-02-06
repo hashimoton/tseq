@@ -37,10 +37,12 @@ class TseqCommand
   
   def tseq(first, last, increment, format)
     t = first
-    while t <= last
+    while t < last
       puts t.strftime(format)
       t += increment
     end
+    
+    puts t.strftime(format)
   end
   
   
