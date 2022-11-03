@@ -17,7 +17,7 @@ class TseqCommand
     
     OptionParser.new do |opt|
       begin
-        opt.version = '0.0.1'
+        opt.version = '0.0.2'
         opt.banner += " [FIRST] [INCREMENT(sec)] [LAST]"
         opt.separator("\nOptions:")
         
@@ -57,12 +57,16 @@ class TseqCommand
     
     
     first_text = argv.shift
-    first = Time.parse(first_text)
-    
     increment_text = argv.shift
-    increment = increment_text.to_i
-    
     last_text = argv.shift
+        
+    if first_text.nil? || increment_text.nil? || last_text.nil?
+      $stderr.puts "Usage: tseq [options] [FIRST] [INCREMENT(sec)] [LAST]"
+      exit 1
+    end
+    
+    first = Time.parse(first_text)
+    increment = increment_text.to_i
     last = Time.parse(last_text)
       
     tseq(first, last, increment, @format)
